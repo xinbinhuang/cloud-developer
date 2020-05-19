@@ -7,7 +7,6 @@ import * as jwt from 'jsonwebtoken';
 import { NextFunction } from 'connect';
 
 import * as EmailValidator from 'email-validator';
-import { platform } from 'os';
 import { config } from '../../../../config/config';
 
 const router: Router = Router();
@@ -24,7 +23,9 @@ async function comparePasswords(plainTextPassword: string, hash: string): Promis
 }
 
 function generateJWT(user: User): string {
-    return jwt.sign(user, config.jwt.secret)
+    return jwt.sign(user.toJSON(), config.jwt.secret, {
+        expiresIn: 604800 // 1 week
+    })
 }
 
 export function requireAuth(req: Request, res: Response, next: NextFunction) {
