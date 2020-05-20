@@ -1,6 +1,6 @@
-# Glossary: Monolithe to Microservice at scale
+# Monolithe to Microservice at scale
 
-- [Glossary: Monolithe to Microservice at scale](#glossary-monolithe-to-microservice-at-scale)
+- [Monolithe to Microservice at scale](#monolithe-to-microservice-at-scale)
   - [1. Microservices Design Principles and Best Practices](#1-microservices-design-principles-and-best-practices)
   - [2. Docker](#2-docker)
     - [Debugging](#debugging)
