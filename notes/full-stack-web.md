@@ -10,6 +10,7 @@
     - [Password Encryption](#password-encryption)
     - [Storing authentication on client side](#storing-authentication-on-client-side)
   - [Scaling and Fixing](#scaling-and-fixing)
+    - [Scaling](#scaling)
     - [Monitoring, Testing and Debugging](#monitoring-testing-and-debugging)
 
 ## Storing Data
@@ -87,6 +88,8 @@ i.e. [config.ts](../course-02/exercises/udacity-c2-restapi/src/config/config.ts)
 | [JSON Web Token - JWT](https://jwt.io/) | Modern method: self-contained encrypted string that contains authentication and authorization; no need to do DB look-up |
 
 ## Scaling and Fixing
+
+### Scaling
 
 - `DNS`
   - `A record`: a domain name that maps to IP
