@@ -123,6 +123,8 @@ Three main container orchestraion players in the market before K8S dominance: `D
 Act as an API Gateway: [Building Microservices: Using an API Gateway](https://www.nginx.com/blog/building-microservices-using-an-api-gateway/)
 
 - simplify service management to have a single point of entry
+- improve security by obscuring the actual host & easy security setup (you only need to secure the reverse proxy istead of all the backends)
+- improve performance by taking care of authentication and caching
 
 ### Securing Microservices
 
