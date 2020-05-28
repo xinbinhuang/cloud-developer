@@ -15,4 +15,4 @@ app.get('/groups', async (_req, res) => {
 })
 
 const server = awsServerlessExpress.createServer(app)
-exports.handler = (event, context) => { awsServerlessExpress.proxy(server, event, context) }
+export const handler = (event, context) => { awsServerlessExpress.proxy(server, event, context) }
