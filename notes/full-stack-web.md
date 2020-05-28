@@ -1,5 +1,7 @@
 # Full stack web
 
+![architecture](img/full-stack-web.jpg)
+
 - [Full stack web](#full-stack-web)
   - [Storing Data](#storing-data)
     - [SignedUrl Pattern](#signedurl-pattern)
@@ -9,6 +11,8 @@
   - [User authentication and security](#user-authentication-and-security)
     - [Password Encryption](#password-encryption)
     - [Storing authentication on client side](#storing-authentication-on-client-side)
+    - [Sessions, JWTs, and Environment Variables](#sessions-jwts-and-environment-variables)
+    - [Security policies](#security-policies)
   - [Scaling and Fixing](#scaling-and-fixing)
     - [Scaling](#scaling)
     - [Monitoring, Testing and Debugging](#monitoring-testing-and-debugging)
@@ -25,7 +29,7 @@
 
 ### SignedUrl Pattern
 
-![signedurl](signedurl.jpg)
+![signedurl](img/signedurl.jpg)
 
 - Client retrieves data directly from S3 instead of server sending back the files
   - reduce server workload
@@ -86,6 +90,19 @@ i.e. [config.ts](../course-02/exercises/udacity-c2-restapi/src/config/config.ts)
 | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | Cookies & session ID                    | Old-style: You need to check with the DB/Server to see if it is valid authenticaion and the corresponding authorization |
 | [JSON Web Token - JWT](https://jwt.io/) | Modern method: self-contained encrypted string that contains authentication and authorization; no need to do DB look-up |
+
+### Sessions, JWTs, and Environment Variables
+
+Our client can be a web browser or another server. In either of these cases, we need to send some authentication information along with each request.
+
+- **web browser**: this is most commonly performed by storing some kind of credentials in something like the [localstorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) which allows us to store information for a specific site in a key-value store. JSON Web Tokens are one type of credential that can be stored locally in this fashion.
+- **servers**: we'll usually want to use something like an `environment variable`. This is a variable which is accessible within that instance and only that instance.
+
+### Security policies
+
+- [NPM](https://www.npmjs.com/policies/security)
+- [Nylas](https://www.nylas.com/security/)
+- [AWS](https://aws.amazon.com/security/)
 
 ## Scaling and Fixing
 
