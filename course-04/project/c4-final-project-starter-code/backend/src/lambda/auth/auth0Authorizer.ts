@@ -2,6 +2,7 @@ import { CustomAuthorizerEvent, CustomAuthorizerResult } from 'aws-lambda'
 import 'source-map-support/register'
 
 import { verify, decode } from 'jsonwebtoken'
+import jwkToPem from 'jwk-to-pem'
 import { createLogger } from '../../utils/logger'
 import Axios from 'axios'
 import { Jwt } from '../../auth/Jwt'
@@ -14,7 +15,7 @@ const jwksUrl = 'https://koala-tree.auth0.com/.well-known/jwks.json'
 export const handler = async (
   event: CustomAuthorizerEvent
 ): Promise<CustomAuthorizerResult> => {
-  logger.info('Authorizing a user', event.authorizationToken)
+  logger.info('Authorizing a user', { token: event.authorizationToken })
   try {
     const jwtToken = await verifyToken(event.authorizationToken)
     logger.info('User was authorized', 'user')
@@ -42,7 +43,7 @@ export const handler = async (
         Statement: [
           {
             Action: 'execute-api:Invoke',
-            Effect: 'Allow',
+            Effect: 'Deny',
             Resource: '*'
           }
         ]
@@ -60,9 +61,8 @@ async function verifyToken(authHeader: string): Promise<JwtPayload> {
   }
 
   const response = await Axios.get(jwksUrl);
-  logger.info(response);
-  var verifedToken = verify(token, response.data, { algorithms: ['RS256'] })
-  logger.info(JSON.stringify(verifedToken))
+  const pem = jwkToPem(response['data']['keys'][0])
+  var verifedToken = verify(token, pem, { algorithms: ['RS256'] })
   return verifedToken as JwtPayload
 }
 
