@@ -12,11 +12,10 @@ import { getUserId } from '../utils'
 const logger = createLogger('updateTodo')
 
 export const handler = middy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  logger.info(`Processing event: ${event}`)
+  
   const todoId = event.pathParameters.todoId
   const updatedTodo: UpdateTodoRequest = JSON.parse(event.body)
   const userId = getUserId(event)
-  await updateTodo(userId, todoId, updatedTodo)
 
   const result = await getTodoById(userId, todoId)
 
@@ -28,6 +27,9 @@ export const handler = middy(async (event: APIGatewayProxyEvent): Promise<APIGat
     }
   }
   
+  logger.info(`User ${userId} updating todo: ${todoId} with data ${updatedTodo}`)
+  await updateTodo(userId, todoId, updatedTodo)
+
   return {
     statusCode: 200,
     body: null

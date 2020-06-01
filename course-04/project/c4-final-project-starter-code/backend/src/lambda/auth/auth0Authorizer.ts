@@ -18,7 +18,7 @@ export const handler = async (
   logger.info('Authorizing a user', { token: event.authorizationToken })
   try {
     const jwtToken = await verifyToken(event.authorizationToken)
-    logger.info('User was authorized', 'user')
+    logger.info('User was authorized', { user: jwtToken.sub })
 
     return {
       principalId: jwtToken.sub,

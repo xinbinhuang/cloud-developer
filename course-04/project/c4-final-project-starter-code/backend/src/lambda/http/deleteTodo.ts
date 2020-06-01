@@ -11,7 +11,7 @@ import { getUserId } from '../utils'
 const logger = createLogger('deleteTodo')
 
 export const handler = middy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  logger.info(`Processing event: ${event}`)
+  
   const todoId = event.pathParameters.todoId
   const userId = getUserId(event)
 
