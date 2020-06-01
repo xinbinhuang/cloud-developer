@@ -1,0 +1,776 @@
+{
+	"info": {
+		"_postman_id": "4a3af717-d924-4a17-a87e-bd483f66d60d",
+		"name": "udacity-c2-restapi",
+		"description": "Requests that should work!",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "/api/v0/feed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fc815f14-8fcc-4d28-8132-73b47856b22b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The count is equal to the number of items rx\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.count).to.eql(jsonData.rows.length);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 600ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v0/feed",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"feed"
+							]
+						},
+						"description": "Get all the items in the feed"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v0/feed/:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5509af7d-7b9d-4a36-a4e5-1b13e4178d23",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"A single item is returned\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.not.eql(null);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v0/feed/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"feed",
+								":id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						},
+						"description": "Request a specific feed item detail"
+					},
+					"response": [
+						{
+							"name": "/api/v0/feed/:id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/feed/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"feed",
+										":id"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "4",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "133"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"85-gic7UchUXbyxmSqNsq7nx4+Eaas\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Mar 2019 15:07:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 3,\n    \"caption\": \"hello0.5278862272947393\",\n    \"url\": null,\n    \"createdAt\": \"2019-03-26T14:16:58.442Z\",\n    \"updatedAt\": \"2019-03-26T14:16:58.443Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/api/v0/user/auth valid registration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "116b1e22-13b5-427a-bbe4-ccce9961b9d9",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"A single item is returned\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.not.eql(null);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"babytreeguavause@gmail.com\",\n\t\"password\":\"fancypass\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/users/auth",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"users",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v0/user/auth invalid registration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "544fb591-ca93-4223-9dfc-27da5ff1d5a1",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"auth is false and a message is included in the error body\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.not.eql(null);",
+									"    pm.expect(jsonData.message).to.not.eql(null)",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"fancypass\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/users/auth",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"users",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v0/user/auth/login valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0f642326-fa6e-4598-8bbb-d2ef3e4b68a7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"body includes an email and token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.auth).to.eql(true);",
+									"    pm.expect(jsonData.user).to.not.eql(null);",
+									"    pm.expect(jsonData.token).to.not.eql(null)",
+									"",
+									"    pm.environment.set(\"token\", jsonData.token);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 800ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(800);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"guava@gmail.com\",\n\t\"password\":\"fancypass\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/users/auth/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"users",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v0/user/auth/login invalid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9de6c17c-996a-4e58-99d9-2e7040e2acef",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"auth is false and a message is included in the error body\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.not.eql(null);",
+									"    pm.expect(jsonData.message).to.not.eql(null)",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/users/auth/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"users",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Unauthorized",
+			"item": [
+				{
+					"name": "/api/v0/feed unauthorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3863a509-3b98-46c7-8b6c-73a820b30eb8",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/feed",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"feed"
+							]
+						},
+						"description": "Post a new item to the feed"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Authorized",
+			"item": [
+				{
+					"name": "/api/v0/feed invalid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "57285691-0b35-424c-bb07-297f3caa64d2",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"body includes a message\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.not.eql(null);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/feed",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"feed"
+							]
+						},
+						"description": "Post a new item to the feed"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v0/feed authorized Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eedaaf05-0e7c-4dd9-b83c-a2d88d34c245",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"The post returns a new item with an id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.not.eql(null);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"caption\": \"guavatree\",\n    \"url\": \"guavatree.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/feed",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"feed"
+							]
+						},
+						"description": "Post a new item to the feed"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v0/feed/:id Patch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b3e5de5-2018-4e47-a197-1878415ff369",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"A single item is returned\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.not.eql(null);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"url\": \"guava\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/feed/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"feed",
+								":id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						},
+						"description": "Request a specific feed item detail"
+					},
+					"response": [
+						{
+							"name": "/api/v0/feed/:id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/feed/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"feed",
+										":id"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "4",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "133"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"85-gic7UchUXbyxmSqNsq7nx4+Eaas\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Mar 2019 15:07:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 3,\n    \"caption\": \"hello0.5278862272947393\",\n    \"url\": null,\n    \"createdAt\": \"2019-03-26T14:16:58.442Z\",\n    \"updatedAt\": \"2019-03-26T14:16:58.443Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/api/v0/signed-url/:fileName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c5e1f6d9-5d4b-499f-be2a-a06273179c03",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "a58484c2-7cc2-4bc8-95c6-b60303fd84d3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2193b351-7109-4e8e-a18b-74260a10039f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1ac5000b-6312-48e0-8db5-754688761bee",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "248b4dd8-72fe-4764-91c1-5cc16de580d6",
+			"key": "host",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"id": "3252e75b-0a22-49da-8edf-76356ce8b42f",
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
